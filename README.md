@@ -21,7 +21,7 @@ Add a new line to the `service providers` array:
 
 And finally add a new line to the `aliases` array:
 
-	'Calendar'        => 'Vics80\Calendar\Facades\Calendar',
+	'Calendar' => 'Vics80\Calendar\Facades\Calendar',
 
 Now you're ready to start using the calendar package in your application.
 
@@ -36,7 +36,10 @@ Calendar::generate();
 
 // Generate a calendar for the specified year and month
 Calendar::generate(2012, 6);
-
+```
+If you want to add events you have two ways to do it:
+The first way is to adding single events without attributes to the event's wrapper
+```php
 // Add an array of events as the third parameter to add them to the calendar, 
 // keys should be the days of the month.
 $data = array(
@@ -48,18 +51,46 @@ $data = array(
 
 Calendar::generate(2006, 6, $data);
 ```
+The second way is to adding multiple events in a same day.
+You cal also add somre attributes to the event's wrapper
+```php
+// Add an array of events as the third parameter to add them to the calendar, 
+// keys should be the days of the month.
+$data = array();
+$data[3][] = array(	
+                'content' => 'http://example.com/news/article/2006/03/',
+                'attr'    => array(
+                        'class' => 'some-css-class'
+                    )
+                );
+$data[3][] = array(
+                'content' => 'http://example.com/news/article/2006/04/',
+                'attr'    => array(
+                        'class' => 'some-css-class'
+                    )
+                ),
+$data[12][] = array(
+                'content' => 'http://example.com/news/article/2006/10/',
+                'attr'    => array(
+                        'class' => 'another-css-class'
+                    )
+                ),
+
+Calendar::generate(2006, 6, $data);
+```
 
 There are a few config variables you can set to change the layout of the calendar:
 
-| Preference     | Default Value | Options                                      | Description                                                                                                                |
-| -------------- | ------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| template       | None          | None                                         | A string containing your calendar template. See the template section below.                                                |
-| local_time     | time()        | None                                         | A Unix timestamp corresponding to the current time.                                                                        |
-| start_day      | sunday        | Any week day (sunday, monday, tuesday, etc.) | Sets the day of the week the calendar should start on.                                                                     |
-| month_type     | long          | long, short                                  | Determines what version of the month name to use in the header. long = January, short = Jan.                               |
-| day_type       | abr           | long, short, abr                             | Determines what version of the weekday names to use in the column headers. long = Sunday, short = Sun, abr = Su.           |
-| show_next_prev | false         | true/false                                   | Determines whether to display links allowing you to toggle to next/previous months. See information on this feature below. |
-| segments       | false         | true/false                                   | Default the next/prev link will use a query string, if you set this var to true, URI segments will be used                 |
+| Preference     | Default Value         | Options                                          | Description                                                                                                                         |
+| -------------- | --------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| template       | None                  | None                                             | A string containing your calendar template. See the template section below.                                                         |
+| local_time     | time()                | None                                             | A Unix timestamp corresponding to the current time.                                                                                 |
+| start_day      | sunday                | Any week day (sunday, monday, tuesday, etc.)     | Sets the day of the week the calendar should start on.                                                                              |
+| month_type     | long                  | long, short                                      | Determines what version of the month name to use in the header. long = January, short = Jan.                                        |
+| day_type       | abr                   | long, short, abr                                 | Determines what version of the weekday names to use in the column headers. long = Sunday, short = Sun, abr = Su.                    |
+| show_next_prev | false                 | true/false                                       | Determines whether to display links allowing you to toggle to next/previous months. See information on this feature below.          |
+| segments       | false                 | true/false                                       | Default the next/prev link will use a query string, if you set this var to true, URI segments will be used                          |
+| eventContainer | <p {attr}>{event}</p> | Some HTML containing {event} and optional {attr} | HTML DOM to show the event ({event} is the string with the event's description and {attr} are the attributes defined in data array) |
 
 You can set these values using the `initialize` method
 
