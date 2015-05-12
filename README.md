@@ -27,6 +27,7 @@ Now you're ready to start using the calendar package in your application.
 
 ## Usage
 
+
 You can use the `generate` method to generate a calendar.
 
 ```php
