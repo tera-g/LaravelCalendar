@@ -23,8 +23,7 @@ class CalendarGenerator {
 	public function __construct($request)
 	{
 		$this->local_time = time();
-		$this->next_prev_url = $request->url();
-
+		$this->next_prev_url = $request->url();                
 		Lang::addNamespace('calendar', __DIR__ . '/../../lang');
 	}
 
