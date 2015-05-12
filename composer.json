@@ -1,11 +1,11 @@
 {
-    "name": "gloudemans/calendar",
-    "description": "Laravel 4 Calendar, port of the CodeIgniter Calender Library",
+    "name": "vics80/calendar",
+    "description": "Laravel 5 Calendar, port of the CodeIgniter Calender Library",
     "keywords": ["laravel", "calendar"],
     "authors": [
         {
-            "name": "Rob Gloudemans",
-            "email": "Rob_Gloudemans@hotmail.com"
+            "name": "Víctor Garcia Merediz",
+            "email": "victorvgm@gmail.com"
         }
     ],
     "require": {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Gloudemans\\Calendar": "src/"
+            "Vics80\\Calendar": "src/"
         }
     },
     "minimum-stability": "dev"

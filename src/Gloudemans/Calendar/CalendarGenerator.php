@@ -13,6 +13,7 @@ class CalendarGenerator {
 	protected $show_next_prev  	= false;
 	protected $next_prev_url   	= '';
 	protected $segments        	= false;
+    protected $eventContainer = "<p {attr}>{event}</p>";
 
 	/**
 	 * Constructor
@@ -174,17 +175,39 @@ class CalendarGenerator {
 				if ($day > 0 AND $day <= $total_days)
 				{
 					if (isset($data[$day]))
-					{
-						// Cells with content
-						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_content_today'] : $this->temp['cal_cell_content'];
-						$out .= str_replace('{day}', $day, str_replace('{content}', $data[$day], $temp));
-					}
-					else
-					{
-						// Cells with no content
-						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
-						$out .= str_replace('{day}', $day, $temp);
-					}
+                    {
+                        // Cells with content
+                        $temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_content_today'] : $this->temp['cal_cell_content'];
+
+                        if (is_array($data[$day])) {
+                            $several_events = '';
+                            foreach ($data[$day] as $event)
+                            {
+
+                                $several_events .= str_replace('{event}', $event['content'], $this->eventContainer);
+
+                                if (!empty($event['attr'])) {
+                                    $attr = "";
+                                    foreach($event['attr'] as $key => $value)
+                                    {
+                                        $attr .= " " . $key . "='" . $value . "'";
+                                    }
+                                    $several_events = str_replace('{attr}', trim($attr), $several_events);
+                                }
+                            }
+
+                            $out .= str_replace('{day}', $day, str_replace('{content}', $several_events, $temp));
+                        } else {
+                            $out .= str_replace('{day}', $day, str_replace('{content}', $data[$day], $temp));
+                        }
+
+                    }
+                    else
+                    {
+                        // Cells with no content
+                        $temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
+                        $out .= str_replace('{day}', $day, $temp);
+                    } 
 				}
 				else
 				{
