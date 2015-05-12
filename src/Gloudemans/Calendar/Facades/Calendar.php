@@ -1,4 +1,4 @@
-<?php namespace Gloudemans\Calendar\Facades;
+<?php namespace Vics80\Calendar\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

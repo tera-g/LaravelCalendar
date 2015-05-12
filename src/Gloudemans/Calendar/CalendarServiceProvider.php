@@ -1,4 +1,4 @@
-<?php namespace Gloudemans\Calendar;
+<?php namespace Vics80\Calendar;
 
 use Illuminate\Support\ServiceProvider;
 

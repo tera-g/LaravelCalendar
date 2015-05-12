@@ -1,6 +1,6 @@
 {
     "name": "vics80/calendar",
-    "description": "Laravel 5 Calendar, port of the CodeIgniter Calender Library",
+    "description": "Laravel 5 Calendar, based on gloudemans/calendar",
     "keywords": ["laravel", "calendar"],
     "authors": [
         {
