@@ -23,7 +23,7 @@ class CalendarGenerator {
 	public function __construct($request)
 	{
 		$this->local_time = time();
-		$this->next_prev_url = $request->url();                
+		$this->next_prev_url = $request->url();
 		Lang::addNamespace('calendar', __DIR__ . '/../../lang');
 	}
 
@@ -169,7 +169,11 @@ class CalendarGenerator {
 
 			for ($i = 0; $i < 7; $i++)
 			{
+				//save fulldate
+				$fulldate = $year . '-' . $month . '-' . $day;
+
 				$out .= ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_start_today'] : $this->temp['cal_cell_start'];
+				$out = str_replace('{fulldate}', $fulldate, $out);
 
 				if ($day > 0 AND $day <= $total_days)
 				{
@@ -194,7 +198,6 @@ class CalendarGenerator {
                                     $several_events = str_replace('{attr}', trim($attr), $several_events);
                                 }
                             }
-
                             $out .= str_replace('{day}', $day, str_replace('{content}', $several_events, $temp));
                         } else {
                             $out .= str_replace('{day}', $day, str_replace('{content}', $data[$day], $temp));
@@ -206,7 +209,7 @@ class CalendarGenerator {
                         // Cells with no content
                         $temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
                         $out .= str_replace('{day}', $day, $temp);
-                    } 
+                    }
 				}
 				else
 				{
@@ -391,8 +394,8 @@ class CalendarGenerator {
 			'week_day_cell'				=> '<td>{week_day}</td>',
 			'week_row_end'				=> '</tr>',
 			'cal_row_start'				=> '<tr>',
-			'cal_cell_start'			=> '<td>',
-			'cal_cell_start_today'		=> '<td>',
+			'cal_cell_start'			=> '<td data-fulldate="{fulldate}">',
+			'cal_cell_start_today'		=> '<td data-fulldate="{fulldate}">',
 			'cal_cell_content'			=> '<a href="{content}">{day}</a>',
 			'cal_cell_content_today'	=> '<a href="{content}"><strong>{day}</strong></a>',
 			'cal_cell_no_content'		=> '{day}',
