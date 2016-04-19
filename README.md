@@ -5,7 +5,7 @@ Install the package through [Composer](http://getcomposer.org/). Edit your proje
 ```php
 "require": {
 	"laravel/framework": "4.0.*",
-	"vics80/calendar": "dev-master"
+	"teragon/calendar": "dev-master"
 }
 ```
 
@@ -17,11 +17,11 @@ Now all you have to do is add the service provider of the package and alias the 
 
 Add a new line to the `service providers` array:
 
-	'Vics80\Calendar\CalendarServiceProvider'
+	'Teragon\Calendar\CalendarServiceProvider'
 
 And finally add a new line to the `aliases` array:
 
-	'Calendar' => 'Vics80\Calendar\Facades\Calendar',
+	'Calendar' => 'Teragon\Calendar\Facades\Calendar',
 
 Now you're ready to start using the calendar package in your application.
 
