@@ -208,15 +208,13 @@ class CalendarGenerator {
                     {
                         // Cells with no content
                         $temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
-                        $out .= str_replace('{day}', $day, $temp);
-                        
                         
                         // Add a trailing slash to the  URL if needed
 						$this->next_prev_url = preg_replace("/(.+?)\/*$/", "\\1/",  $this->next_prev_url);
 						$adjusted_date = $this->adjust_date($month, $year);
 						$url = $this->next_prev_url.'?year='.$adjusted_date['year'].'&month='.$adjusted_date['month'].'&day='.$day;
 			
-						$out .= str_replace('{day_url}', $url, $temp);
+						$out .= str_replace('{day_url}', $url, str_replace('{day}', $day, $temp));
                     }
 				}
 				else
