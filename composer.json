@@ -1,11 +1,11 @@
 {
-    "name": "vics80/calendar",
-    "description": "Laravel 5 Calendar, based on gloudemans/calendar",
+    "name": "teragon/calendar",
+    "description": "Laravel 5 Calendar, based on gloudemans/calendar and vics80/calendar",
     "keywords": ["laravel", "calendar"],
     "authors": [
         {
-            "name": "Víctor Garcia Merediz",
-            "email": "victorvgm@gmail.com"
+            "name": "BC Choi",
+            "email": "hypermix87@gmail.com"
         }
     ],
     "require": {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Vics80\\Calendar": "src/"
+            "Teragon\\Calendar": "src/"
         }
     },
     "minimum-stability": "dev"

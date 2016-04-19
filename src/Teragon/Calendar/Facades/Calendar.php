@@ -1,4 +1,4 @@
-<?php namespace Vics80\Calendar\Facades;
+<?php namespace Teragon\Calendar\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

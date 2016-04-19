@@ -1,4 +1,4 @@
-<?php namespace Vics80\Calendar;
+<?php namespace Teragon\Calendar;
 
 use Lang;
 
@@ -209,6 +209,14 @@ class CalendarGenerator {
                         // Cells with no content
                         $temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
                         $out .= str_replace('{day}', $day, $temp);
+                        
+                        
+                        // Add a trailing slash to the  URL if needed
+						$this->next_prev_url = preg_replace("/(.+?)\/*$/", "\\1/",  $this->next_prev_url);
+						$adjusted_date = $this->adjust_date($month, $year);
+						$url = $this->next_prev_url.'?year='.$adjusted_date['year'].'&month='.$adjusted_date['month'].'&day='.$day;
+			
+						$out .= str_replace('{day_url}', $url, $temp);
                     }
 				}
 				else
@@ -398,8 +406,8 @@ class CalendarGenerator {
 			'cal_cell_start_today'		=> '<td data-fulldate="{fulldate}">',
 			'cal_cell_content'			=> '<a href="{content}">{day}</a>',
 			'cal_cell_content_today'	=> '<a href="{content}"><strong>{day}</strong></a>',
-			'cal_cell_no_content'		=> '{day}',
-			'cal_cell_no_content_today'	=> '<strong>{day}</strong>',
+			'cal_cell_no_content'		=> '<a href="{day_url}">{day}</a>',
+			'cal_cell_no_content_today'	=> '<a href="{day_url}"><strong>{day}</strong></a>',
 			'cal_cell_blank'			=> '&nbsp;',
 			'cal_cell_end'				=> '</td>',
 			'cal_cell_end_today'		=> '</td>',
